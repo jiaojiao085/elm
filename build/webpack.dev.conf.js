@@ -11,6 +11,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function(name) {
 })
 
 module.exports = merge(baseWebpackConfig, {
+    mode:'development',
     module: {
         loaders: utils.styleLoaders({
             sourceMap: config.dev.cssSourceMap
@@ -23,9 +24,9 @@ module.exports = merge(baseWebpackConfig, {
             'process.env': config.dev.env
         }),
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
-        new webpack.optimize.OccurenceOrderPlugin(),
+        //new webpack.optimize.OccurenceOrderPlugin(),//webpack4已经废弃了occurence-order-plugin
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: 'index.html',

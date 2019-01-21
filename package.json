@@ -14,10 +14,13 @@
     "better-scroll": "^0.1.15",
     "fastclick": "^1.0.6",
     "iscroll": "^5.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "showdown": "^1.6.4",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
-    "vuex": "^2.0.0"
+    "vuex": "^2.0.0",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -35,7 +38,6 @@
     "css-loader": "^0.25.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "function-bind": "^1.0.2",
     "html-webpack-plugin": "^2.8.1",
@@ -55,17 +57,16 @@
     "shelljs": "^0.7.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "vue-loader": "^10.0.0",
+    "vue-loader": "^14.2.3",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.1.0",
-    "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">=6.11.5",//wepback升级到4后不再支持node4的版本，建议用8.12.0
+    "npm": ">= 3.0.0"//npm建议用6.4.1
   }
 }

@@ -4,11 +4,13 @@ var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+//var ExtractTextPlugin = require('extract-text-webpack-plugin')//webpack4废弃了此插件，改用mini-css-extract-plugin
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var env = config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
+    mode:'production',
     module: {
         loaders: utils.styleLoaders({
             sourceMap: config.build.productionSourceMap,
@@ -21,12 +23,12 @@ var webpackConfig = merge(baseWebpackConfig, {
         filename: utils.assetsPath('js/[name].js'),
         chunkFilename: utils.assetsPath('js/[name].[chunkhash].min.js')
     },
-    vue: {
-        loaders: utils.cssLoaders({
-            sourceMap: config.build.productionSourceMap,
-            extract: true
-        })
-    },
+    // vue: {
+    //     loaders: utils.cssLoaders({
+    //         sourceMap: config.build.productionSourceMap,
+    //         extract: true
+    //     })
+    // },
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
@@ -39,7 +41,9 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         // extract css into its own file
-        new ExtractTextPlugin(utils.assetsPath('css/[name].css')),
+        new MiniCssExtractPlugin({
+            filename:utils.assetsPath('css/[name].css')
+        }),
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin

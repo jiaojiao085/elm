@@ -1,6 +1,8 @@
 var path = require('path')
 var config = require('../config')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');//webpack4废弃了此插件,改用mini-css-extract-plugin
+const MiniCssExtractPlugin=require('mini-css-extract-plugin');
+
 
 exports.assetsPath = function(_path) {
     var assetsSubDirectory = process.env.NODE_ENV === 'production' ? config.build.assetsSubDirectory : config.dev.assetsSubDirectory
@@ -24,8 +26,13 @@ exports.cssLoaders = function(options) {
         }).join('!')
 
         // (which is the case during production build)
+        // if (options.extract) {
+        //     return ExtractTextPlugin.extract('vue-style-loader', sourceLoader)
+        // } else {
+        //     return ['vue-style-loader', sourceLoader].join('!')
+        // }
         if (options.extract) {
-            return ExtractTextPlugin.extract('vue-style-loader', sourceLoader)
+            return MiniCssExtractPlugin.loader('vue-style-loader', sourceLoader)
         } else {
             return ['vue-style-loader', sourceLoader].join('!')
         }
@@ -39,7 +46,7 @@ exports.cssLoaders = function(options) {
         sass: generateLoaders(['css', 'sass?indentedSyntax']),
         scss: generateLoaders(['css', 'sass']),
         stylus: generateLoaders(['css', 'stylus']),
-        styl: generateLoaders(['css', 'stylus'])
+        style: generateLoaders(['css', 'stylus'])
     }
 }
 
@@ -47,6 +54,8 @@ exports.cssLoaders = function(options) {
 exports.styleLoaders = function(options) {
     var output = []
     var loaders = exports.cssLoaders(options)
+    console.log('看这里...')
+    console.log(loaders)
     for (var extension in loaders) {
         var loader = loaders[extension]
         output.push({
@@ -54,5 +63,7 @@ exports.styleLoaders = function(options) {
             loader: loader
         })
     }
+    console.log('这里啦啦...')
+    console.log(output)
     return output
 }
